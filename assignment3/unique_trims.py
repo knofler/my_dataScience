@@ -15,24 +15,15 @@ def mapper(record):
     # value: document contents
 
     key = record[0]
+    nucleotides = record[1]
 
-    mr.emit_intermediate(key,record)
+    trimmed = nucleotides[:len(nucleotides) -10]
+
+    mr.emit_intermediate(trimmed,key)
 
 def reducer(key, list_of_values):
 
-    # key: word
-    # value: list of occurrence counts
-
-    # pairs = [tuple(l) for l in list_of_values]
-    # all_set = set(pairs)
-
-    # dups_set = set([pair for pair in pairs if pairs.count(pair) > 1]) 
-
-    # asymmetric_friends = all_set^dups_set
-
-    # map(lambda x: mr.emit(pair),asymmetric_friends)
-    mr.emit(list_of_values)
-    
+    mr.emit(key)
 
 # Do not modify below this line
 # =============================
